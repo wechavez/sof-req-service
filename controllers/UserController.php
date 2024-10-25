@@ -4,13 +4,13 @@ require_once 'models/User.php';
 
 class UserController {
     private $db;
-    
+
     public function __construct() {
         $this->db = (new Database())->getConnection();
     }
 
     public function getAllUsers() {
-        
+
         $query = "SELECT * FROM users";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

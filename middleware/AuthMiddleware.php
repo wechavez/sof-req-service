@@ -3,7 +3,7 @@ require_once 'services/JWTService.php';
 
 class AuthMiddleware {
     public static function validateToken() {
-        
+
         $headers = getallheaders();
 
         if (!isset($headers['Authorization'])) {
@@ -11,9 +11,9 @@ class AuthMiddleware {
             echo json_encode(['message' => 'Token no proporcionado']);
             exit();
         }
-        
+
         list(, $token) = explode(' ', $headers['Authorization']);
-        
+
         $payload = JWTService::verifyJWT($token);
 
         if (!$payload) {
@@ -21,7 +21,7 @@ class AuthMiddleware {
             echo json_encode(['message' => 'Token inválido o expirado']);
             exit();
         }
-        
+
         return $payload;
     }
 }

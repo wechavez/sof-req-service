@@ -16,7 +16,7 @@ class JWTService {
         $payload = new JWTPayload();
         $payload->id = $id;
         $payload->email = $email;
-        
+
         $payload->exp = time() + (60 * 60); // 1h
 
         $header = json_encode(['alg' => 'HS256', 'typ' => 'JWT']);
@@ -31,17 +31,17 @@ class JWTService {
     public static function verifyJWT($jwt) {
         list($header, $payload, $signature) = explode('.', $jwt);
         $validSignature = self::base64UrlEncode(hash_hmac('sha256', $header . "." . $payload, self::$secretKey, true));
-        
+
         if (!hash_equals($signature, $validSignature)) {
             return false;
         }
-        
+
         $payloadArray = json_decode(base64_decode($payload), true);
-    
+
         if (isset($payloadArray['exp']) && $payloadArray['exp'] < time()) {
             return false;
         }
-        
+
         return $payloadArray;
     }
 }

@@ -9,6 +9,5 @@ require_once 'routes.php';
 
 $route = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
-
 handleRoute($route, $method);
 ?>

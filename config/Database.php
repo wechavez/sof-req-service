@@ -1,11 +1,11 @@
 <?php
 class Database {
-    
-    private $host = 'mysql';
+
+    private $host = 'localhost';
     private $db_name = 'my_database';
-    private $username = 'user';
-    private $password = 'password';
-    
+    private $username = 'root';
+    private $password = '';
+
     public $conn;
 
     public function getConnection() {
