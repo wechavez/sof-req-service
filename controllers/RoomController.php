@@ -155,7 +155,7 @@ class RoomController{
                 'message' => 'Acceso denegado: Has alcanzado el número máximo de intentos en esta sala.',
                 'attempts' => "$totalAttempts / {$room['max_attempts']}",
                 'room_name' => "$room_name",
-                'room_code' => "$room_code"
+                'room_code' => "$room_code" // TODO: Change to (0 or -1) or consider adding a boolean field.
             ]);
             return;
         }

@@ -28,6 +28,7 @@ CREATE TABLE tried (
   score INT NOT NULL,
   status ENUM('completed', 'abandoned') NOT NULL,
   time TIME NOT NULL COMMENT 'time in the format: 00:01:35',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (room_id) REFERENCES rooms(id)
 );

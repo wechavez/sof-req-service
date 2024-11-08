@@ -2,6 +2,7 @@
 require_once 'controllers/AuthController.php';
 require_once 'controllers/UserController.php';
 require_once 'controllers/RoomController.php';
+require_once 'controllers/TriedController.php';
 require_once 'controllers/AssistantController.php';
 
 require_once 'middleware/AuthMiddleware.php';
@@ -12,6 +13,7 @@ function handleRoute($route, $method) {
     $userController = new UserController();
     $assistantController = new AssistantController();
     $roomController = new RoomController();
+    $triedController = new TriedController();
 
 
     // Public routes
@@ -54,6 +56,25 @@ function handleRoute($route, $method) {
         $roomController -> joinRoom($payload['id'], $payload['email']);
         return;
     }
+
+    if($method === 'POST' && $route === '/save-tried' ){
+        $payload = AuthMiddleware::validateToken();
+        $triedController -> saveTried($payload['id'], $payload['email']);
+        return;
+    }
+
+    if($method === 'POST' && $route === '/show-stats' ){
+        $payload = AuthMiddleware::validateToken();
+        $triedController -> showStats($payload['id'], $payload['email']);
+        return;
+    }
+
+    if($method === 'POST' && $route === '/show-all-stats' ){
+        $payload = AuthMiddleware::validateToken();
+        $triedController -> showAllStats($payload['id'], $payload['email']);
+        return;
+    }
+
 
 }
 ?>
